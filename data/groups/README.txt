@@ -1,0 +1,1 @@
+This folder is used to store all of the groups created in the system

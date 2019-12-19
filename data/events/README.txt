@@ -1,0 +1,1 @@
+This folder is used to store all the events created in the system

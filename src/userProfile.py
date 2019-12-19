@@ -2,7 +2,7 @@ from itertools import count
 from timeLine import TimeLine
 class UserProfile : 
     counter = count(0)
-    def __init__(self, name, email, password):
+    def __init__(self, name=None, email=None, password=None):
         self.uniqueId = next(counter)
         self.name = name
         self.email = email
