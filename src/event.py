@@ -1,8 +1,8 @@
 from newsFeed import NewsFeed
 
 class Event(NewsFeed):
-    def __init__(self,id = None, name = None, icon = None, owner = None):
-        NewsFeed.__init__(id,name, icon, owner)
+    def __init__(self, name , icon , owner,id = None):
+        NewsFeed.__init__(self,id,name, icon, owner)
         self.place = ''
         self.time = ''
         self.date = ''
@@ -19,6 +19,18 @@ class Event(NewsFeed):
 
     def set_about(self,about):
         self.about = about
+    
+    def to_json(self):
+        return{
+            'name':self.name,
+            'owner':self.owner,
+            'id':str(self.uid),
+            'place':self.place,
+            'time':self.time,
+            'date':self.date,
+            'about':self.about,
+            'posts':self.posts
+        }
 
 
   
