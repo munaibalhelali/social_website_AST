@@ -1,5 +1,6 @@
 from itertools import count
 from timeLine import TimeLine
+import copy
 class UserProfile : 
     counter = count(0)
     def __init__(self, name=None, email=None, password=None):
@@ -11,41 +12,72 @@ class UserProfile :
         self.friends=[]
         self.timeLine= TimeLine(self.name, self.picture, self.uniqueId)
         self.my_pages = []
-        self.subscribed_pages = []
+        self.followed_pages = []
         self.my_groups = []
-        self.subscribed_groups = []
+        self.joined_groups = []
         self.my_events = []
     
 
 
-def setName(self, in_name):
+def set_name(self, in_name):
     self.name = in_name
 
-def setEmail(self, in_email):
+def set_email(self, in_email):
     self.email = in_email
 
-def setPassword(self, in_password):
+def set_password(self, in_password):
      self.password = in_password
     
-def setPicture(self, in_pic):
+def set_picture(self, in_pic):
     self.picture = in_pic
 
-def addFriend(self, in_friend):
+def add_friend(self, in_friend):
     self.friends.append(in_friend)
-  
-def getName(self):
+def init_friends(self, in_friends):
+    self.friends= copy.deepcopy(in_friends)
+
+def add_my_group(self,group):
+    self.my_groups.append(group)
+def init_my_groups(self,group):
+    self.my_groups= copy.deepcopy(group)
+
+def join_group(self,group):
+    self.joined_groups.append(group)
+def init_joined_groups(self,group):
+    self.joined_groups= copy.deepcopy(group)
+
+def add_my_page(self, page):
+    self.my_pages.append(page)
+def init_my_pages(self, pages):
+    self.my_pages= copy.deepcopy(pages)
+
+def follow_page(self, page):
+    self.followed_pages.append(page)
+def init_followed_pages(self, pages):
+    self.followed_pages = copy.deepcopy(pages)
+
+def add_event(self, event):
+    self.my_events.append(event)
+def init_events(self, events):
+    self.my_events = copy.deepcopy(events)
+
+
+def get_id(self):
+    return self.uniqueId
+    
+def get_name(self):
     return self.name
 
-def getEmail(self):
+def get_email(self):
     return self.email
 
-def getPassword(self):
+def get_password(self):
      return self.password
     
-def getPicture(self):
+def get_picture(self):
     return self.picture
 
-def getFriends(self):
+def get_friends(self):
     return list(self.friends)
 
 
