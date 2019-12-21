@@ -1,17 +1,17 @@
 from itertools import count
 from datetime import datetime
+from counter_values import CounterValues
 class Post():
     """Provides the necessary tools to create a post"""
-    counter = count(1000000000)
+    last_counter = CounterValues()
     curr_time = datetime.now()
-    def __init__(self,id=None, owner=None, content=None):
+    def __init__(self, owner, content,id=None):
         self.owner= owner
         self.content = content
-        self.uid = next(self.counter) if id== None else id 
+        self.uid = id if id != None else self.last_counter.get_next('post')
         self.time = self.curr_time.strftime("%H:%M:%S") 
-        self.date = self.curr_time.strftime("%m/%d/%Y,")
+        self.date = self.curr_time.strftime("%m/%d/%Y")
         
-
     def set_date_time(self,date, time):
         self.time = time
         self.date = date

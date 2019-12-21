@@ -1,1 +1,0 @@
-{"name": "testing code", "owner": 0, "id": "1000007", "place": "at home", "time": "00:00", "date": "01/01/2020", "about": "testing the functionality of dataManipulator class", "posts": []}

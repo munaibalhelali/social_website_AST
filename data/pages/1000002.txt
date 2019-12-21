@@ -1,1 +1,0 @@
-{"name": "mypage", "owner": 0, "id": "1000002", "followers": [], "admins": [], "posts": []}

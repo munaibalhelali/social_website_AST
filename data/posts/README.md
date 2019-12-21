@@ -1,0 +1,1 @@
+This folder is used to store the last values of the counters

@@ -1,22 +1,28 @@
 from itertools import count
 from timeLine import TimeLine
 import copy
+from counter_values import CounterValues
 class UserProfile : 
-    counter = count(0)
-    def __init__(self, name=None, email=None, password=None):
-        self.uid = next(self.counter)
+    last_counter = CounterValues()
+    def __init__(self,id=None, name=None, email=None, password=None,time_line_id=None):
+        if id == None:
+            self.uid = self.last_counter.get_next('user') 
+        else:
+            self.uid = id
         self.name = name
         self.email = email
         self.password=password
         self.picture=[]
         self.friends=[]
-        self.timeLine= TimeLine(self.name, self.picture, self.uid)
         self.my_pages = []
         self.followed_pages = []
         self.my_groups = []
         self.joined_groups = []
         self.my_events = []
         self.my_posts = []
+        self.timeLine= TimeLine(self.name, self.picture, self.uid, time_line_id)
+        self.timeLine.add_post(self.my_posts)
+
     
 
 
@@ -61,6 +67,13 @@ class UserProfile :
         self.my_events.append(event)
     def init_events(self, events):
         self.my_events = copy.deepcopy(events)
+    
+    def add_post(self, post):
+        self.my_posts.append(post)
+        self.timeLine.add_post(post)
+    def init_post(self,posts):
+        self.my_posts = copy.deepcopy(posts)
+        self.timeLine.add_post(posts)
 
 
     def get_id(self):
