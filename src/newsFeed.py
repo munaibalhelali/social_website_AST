@@ -1,10 +1,15 @@
 from itertools import count
 import copy
+from counter_values import CounterValues
 class NewsFeed:
-	counter = count(1000000)
+	last_counter = CounterValues()
+	
 	def __init__(self,id, name, icon, owner):
 		self.name = name
-		self.uid = id if id!= None else next(self.counter)
+		if id == None :
+			self.uid = self.last_counter.get_next('news_feed')
+		else: 
+			self.uid = id 
 		self.icon=icon
 		self.owner=owner
 		self.posts=[]
