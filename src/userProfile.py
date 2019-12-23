@@ -42,31 +42,48 @@ class UserProfile :
         self.friends.append(in_friend)
     def init_friends(self, in_friends):
         self.friends= copy.deepcopy(in_friends)
+    def remove_friend(self, in_friend):
+        self.friends.remove(in_friend)
 
     def add_my_group(self,group):
         self.my_groups.append(group)
     def init_my_groups(self,group):
         self.my_groups= copy.deepcopy(group)
+    def delete_my_group(self,group_id):
+        if group_id in self.my_groups:
+            self.my_groups.remove(group_id)
 
     def join_group(self,group):
         self.joined_groups.append(group)
     def init_joined_groups(self,group):
         self.joined_groups= copy.deepcopy(group)
+    def leave_group(self,group_id):
+        if group_id in self.joined_groups:
+            self.joined_groups.remove(group_id)
 
     def add_my_page(self, page):
         self.my_pages.append(page)
     def init_my_pages(self, pages):
         self.my_pages= copy.deepcopy(pages)
+    def delete_my_page(self, page_id):
+        if page_id in self.my_pages:
+            self.my_pages.remove(page_id)
 
     def follow_page(self, page):
         self.followed_pages.append(page)
     def init_followed_pages(self, pages):
         self.followed_pages = copy.deepcopy(pages)
+    def unfollow_page(self, page_id):
+        if page_id in self.followed_pages:
+            self.follow_pages.remove(page_id)
 
     def add_event(self, event):
         self.my_events.append(event)
     def init_events(self, events):
         self.my_events = copy.deepcopy(events)
+    def delete_event(self, event_id):
+        if event_id in self.my_events:
+            self.my_events.remove(event_id)
     
     def add_post(self, post):
         self.my_posts.append(post)
@@ -74,6 +91,9 @@ class UserProfile :
     def init_post(self,posts):
         self.my_posts = copy.deepcopy(posts)
         self.timeLine.add_post(posts)
+    def delete_post(self, post_id):
+        if post_id in self.my_posts:
+            self.my_posts.remove(post_id)
 
 
     def get_id(self):

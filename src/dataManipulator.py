@@ -192,6 +192,13 @@ class DataManipulator():
 
     def delete_page(self, page_id: str):
         path = os.path.join(self.cwd,'data/pages',page_id+'.txt')
+        
+        owner_id = database.pages[page_id]['owner']
+        owner = database.users[owner_id]
+        owner.delete_my_page(page_id)
+        self.write_users_to_file(owner.to_json())
+        database.users[owner_id] = owner
+
         if self.__delete_file_from_database(path):
             self.pages.pop(page_id)
             return True
@@ -204,6 +211,13 @@ class DataManipulator():
 
     def delete_group(self,group_id):
         path = os.path.join(self.cwd,'data/groups',group_id+'.txt')
+        
+        owner_id = database.groups[group_id]['owner']
+        owner = database.users[owner_id]
+        owner.delete_my_group(group_id)
+        self.write_users_to_file(owner.to_json())
+        database.users[owner_id] = owner
+
         if self.__delete_file_from_database(path):
             self.groups.pop(group_id)
             return True
@@ -215,6 +229,13 @@ class DataManipulator():
 
     def delete_event(self, event_id):
         path = os.path.join(self.cwd,'data/events',event_id+'.txt')
+        
+        owner_id = database.events[event_id]['owner']
+        owner = database.users[owner_id]
+        owner.delete_event(event_id)
+        self.write_users_to_file(owner.to_json())
+        database.users[owner_id] = owner
+
         if self.__delete_file_from_database(path):
             self.groups.pop(event_id)
             return True
@@ -226,12 +247,19 @@ class DataManipulator():
 
     def delete_post(self,post_id:str):
         path = os.path.join(self.cwd,'data/posts',post_id+'.txt')
+
+        owner_id = database.posts[post_id]['owner']
+        owner = database.users[owner_id]
+        owner.delete_post(post_id)
+        self.write_users_to_file(owner.to_json())
+        database.users[owner_id] = owner
+
         if self.__delete_file_from_database(path):
             self.posts.pop(post_id)
             return True
         else: return False
 
-    
+
 
     def __delete_file_from_database(self, path:str):
         if os.path.exists(path):
