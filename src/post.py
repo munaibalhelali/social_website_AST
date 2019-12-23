@@ -34,6 +34,9 @@ class Post():
     def get_counter(self):
         return next(self.counter)
 
+    def get_id(self):
+        return self.uid 
+
 
     
   
