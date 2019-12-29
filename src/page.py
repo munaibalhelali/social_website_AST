@@ -11,11 +11,15 @@ class Page(NewsFeed):
         self.followers.append(follower)
     def init_followers(self, followers):
         self.followers = copy.deepcopy(followers)
+    def get_followers(self):
+        return self.followers
 
     def add_admin(self, admin):
         self.admins.append(admin)
     def init_admins(self, admins):
         self.admins = copy.deepcopy(admins)
+    def get_admins(self):
+        return self.admins 
 
     def to_json(self):
         return{
@@ -24,5 +28,6 @@ class Page(NewsFeed):
             'id':str(self.uid),
             'followers':self.followers,
             'admins':self.admins,
-            'posts':self.posts
+            'posts':self.posts,
+            'timeline':False
         }

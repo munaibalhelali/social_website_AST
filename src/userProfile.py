@@ -12,6 +12,7 @@ class UserProfile :
         self.name = name
         self.email = email
         self.password=password
+        self.system_admin = False
         self.picture=[]
         self.friends=[]
         self.my_pages = []
@@ -20,9 +21,8 @@ class UserProfile :
         self.joined_groups = []
         self.my_events = []
         self.my_posts = []
-        self.timeLine= TimeLine(self.name, self.picture, self.uid, time_line_id)
+        self.timeLine= TimeLine('TimeLine: '+self.name, self.picture, self.uid, time_line_id)
         self.timeLine.add_post(self.my_posts)
-
     
 
 
@@ -37,6 +37,8 @@ class UserProfile :
         
     def set_picture(self, in_pic):
         self.picture = in_pic
+    def set_system_admin(self, status):
+        self.system_admin = status 
 
     def add_friend(self, in_friend):
         self.friends.append(in_friend)
@@ -95,7 +97,9 @@ class UserProfile :
         if post_id in self.my_posts:
             self.my_posts.remove(post_id)
 
-
+    def is_system_admin(self):
+        return self.system_admin
+        
     def get_id(self):
         return self.uid
         
@@ -114,6 +118,17 @@ class UserProfile :
     def get_friends(self):
         return list(self.friends)
 
+    def get_timeline(self):
+        return str(self.timeLine.get_id())
+
+    def get_pages(self):
+        return self.my_pages[:]
+
+    def get_groups(self):
+        return self.my_groups[:]
+    
+    def get_events(self):
+        return self.my_events[:]
     def to_json(self):
         return{
             'id':str(self.uid),
@@ -130,6 +145,5 @@ class UserProfile :
             'my_posts':self.my_posts
         }
 
-    def get_counter(self):
-        return next(self.counter)
+
         

@@ -17,12 +17,17 @@ class Post():
         self.date = date
         
 
-    def getOwner(self):
+    def get_owner(self):
         return self.owner
 
-    def getContent(self):
+    def get_content(self):
         return self.content
 
+    def get_date(self):
+        return self.date 
+    
+    def get_time(self):
+        return self.time 
 
     def to_json(self):
         return {'owner':self.owner,
@@ -31,8 +36,6 @@ class Post():
                 'time':self.time,
                 'date':self.date }
 
-    def get_counter(self):
-        return next(self.counter)
 
     def get_id(self):
         return self.uid 
