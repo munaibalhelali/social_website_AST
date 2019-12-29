@@ -10,11 +10,15 @@ class Group(NewsFeed):
         self.members.append(member)
     def init_members(self, members):
         self.members = copy.deepcopy(members)
+    def get_members(self):
+        return self.members
 
     def add_admin(self, admin):
         self.admins.append(admin)
     def init_admins(self, admins):
         self.admins = copy.deepcopy(admins)
+    def get_admins(self):
+        return self.admins 
     
     def to_json(self):
         return{
@@ -23,7 +27,8 @@ class Group(NewsFeed):
             'id':str(self.uid),
             'members':self.members,
             'admins':self.admins,
-            'posts':self.posts
+            'posts':self.posts,
+            'timeline':False
         }
     
     

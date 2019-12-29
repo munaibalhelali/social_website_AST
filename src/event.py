@@ -19,7 +19,18 @@ class Event(NewsFeed):
 
     def set_about(self,about):
         self.about = about
+    def get_time(self):
+        return self.time 
     
+    def get_date(self):
+        return self.date 
+    
+    def get_place(self):
+        return self.place 
+
+    def get_description(self):
+        return self.about 
+        
     def to_json(self):
         return{
             'name':self.name,
@@ -29,7 +40,8 @@ class Event(NewsFeed):
             'time':self.time,
             'date':self.date,
             'about':self.about,
-            'posts':self.posts
+            'posts':self.posts,
+            'timeline':False
         }
 
 

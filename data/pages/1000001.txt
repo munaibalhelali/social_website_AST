@@ -1,1 +1,1 @@
-{"name": "mypage", "owner": 2, "id": "1000001", "followers": [], "admins": [], "posts": []}
+{"name": "mypage", "owner": 0, "id": "1000001", "followers": ["0", "17"], "admins": [], "posts": ["1000000000", "1000000009", "1000000009"], "timeline": false}
