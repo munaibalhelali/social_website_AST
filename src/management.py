@@ -91,7 +91,7 @@ class Management():
     def join_group(self, user_id, group_id):
         """This function is used to enable a user to join groups"""
         group = self.database.groups[group_id]
-        group.add_follower(user_id)
+        group.add_member(user_id)
         self.database.add_new_page(group)
 
         user = self.database.users[user_id]
@@ -236,8 +236,12 @@ class Management():
                         password = input('Re-enter password: ')
             else: 
                 print('Email is not in the system!!! ')
+                return False, -1 
         elif int(log_option) == 2:
             self.create_new_user()
+            return False, -1 
+        else:
+            return False, -1 
 
             
             

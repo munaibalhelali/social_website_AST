@@ -1,4 +1,3 @@
-from itertools import count
 import copy
 from counter_values import CounterValues
 class NewsFeed:
@@ -8,6 +7,7 @@ class NewsFeed:
 		self.name = name
 		if id == None :
 			self.uid = self.last_counter.get_next('news_feed')
+
 		else: 
 			self.uid = id 
 		self.icon=icon
@@ -36,7 +36,4 @@ class NewsFeed:
 
 	def display_post(self, post):
 			return post.getcontent()
-	
-	def get_counter(self):
-		return next(self.counter)
 	

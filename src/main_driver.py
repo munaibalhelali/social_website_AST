@@ -55,7 +55,7 @@ if __name__ == "__main__":
                                                 Enter your choice: ')
                         if sub_option == '1':
                             chosen_page = input('Enter the page number: ')
-                            viewer.view_page(manager.database.pages[current_user.get_pages()[chosen_page-1]])
+                            viewer.view_page(manager.database.pages[current_user.get_pages()[int(chosen_page)-1]])
                         elif sub_option == '2':
                             page_to_remove = input('Enter the group number: ')
                             page = my_pages_list[int(page_to_remove)]
@@ -85,7 +85,7 @@ if __name__ == "__main__":
                                                 Enter your choice: ')
                         if sub_option == '1':
                             chosen_group = input('Enter the group number: ')
-                            viewer.view_group(manager.database.pages[current_user.get_groups()[chosen_group-1]])
+                            viewer.view_group(manager.database.groups[current_user.get_groups()[int(chosen_group)-1]])
                         elif sub_option == '2':
                             group_to_remove = input('Enter the group number: ')
                             group = my_groups_list[int(group_to_remove)]
@@ -146,7 +146,7 @@ if __name__ == "__main__":
                         elif sub_option == '2':
                             group_no = input('Enter the group number: ')
                             manager.join_group(current_user.get_id(),
-                                                groups_list[int(group_no)].get_id())
+                                                groups_list[int(group_no)-1].get_id())
                         elif sub_option == '3':
                             group_no = input('Enter the page number you want to post on: ')
                             post_id = manager.create_new_post(current_user.get_id())

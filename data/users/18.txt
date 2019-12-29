@@ -1,1 +1,1 @@
-{"id": "18", "name": "admin", "email": "admin@system.com", "password": "admin1234", "friends": [], "timeline": "1000042", "my_pages": [], "followed_pages": [], "my_groups": [], "joined_groups": [], "my_events": [], "my_posts": []}
+{"id": "18", "name": "Abdullah", "email": "abdo@gmail.com", "password": "abdo1111", "friends": [], "timeline": "1000042", "my_pages": [], "followed_pages": [], "my_groups": [], "joined_groups": [], "my_events": [], "my_posts": []}

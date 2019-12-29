@@ -173,6 +173,7 @@ class DataManipulator():
     
     def add_new_user(self, user: UserProfile):
         self.users[user.get_id()] =user
+        self.pages[user.timeLine.get_id()]= user.timeLine
         self.write_user_to_file(user.to_json())
         self.write_page_to_file(user.timeLine.to_json()) 
 
@@ -210,7 +211,7 @@ class DataManipulator():
 
     def add_new_group(self, group: Group):
         self.groups[group.get_id()] = group
-        self.write_group_to_file(group.to_json)
+        self.write_group_to_file(group.to_json())
 
     def delete_group(self,group_id):
         path = os.path.join(self.cwd,'data/groups',group_id+'.txt')
@@ -228,7 +229,7 @@ class DataManipulator():
     
     def add_new_event(self, event:Event):
         self.events[event.get_id()] = event
-        self.write_event_to_file(event.to_json)
+        self.write_event_to_file(event.to_json())
 
     def delete_event(self, event_id):
         path = os.path.join(self.cwd,'data/events',event_id+'.txt')
