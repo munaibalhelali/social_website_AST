@@ -1,1 +1,1 @@
-{"name": "mygroup", "owner": 2, "id": "1000002", "members": [], "admins": [], "posts": []}
+{"name": "mygroup", "owner": 20, "id": "1000002", "members": [], "admins": [], "posts": []}

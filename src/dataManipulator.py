@@ -143,50 +143,67 @@ class DataManipulator():
         """This function is used to write/update user info in the users folder"""
         with open(os.path.join(self.cwd,'data/users',user['id']+'.txt'),'w') as outputfile:
             json.dump(user,outputfile)
+            return True 
+        return False
+        
         
 
     def write_group_to_file(self, group:dict):
         """This function is used to write/update group info in the groups folder"""
         with open(os.path.join(self.cwd,'data/groups',group['id']+'.txt'),'w') as outputfile:
             json.dump(group,outputfile)
+            return True 
+        return False
     
     def write_page_to_file(self,page:dict):
         """This function is used to write/update page info in the pages folder"""
         with open(os.path.join(self.cwd,'data/pages',page['id']+'.txt'),'w') as outputfile:
             json.dump(page,outputfile)
+            return True 
+        return False
         
     def write_event_to_file(self,event:dict):
         """This function is used to write/update event info in the events folder"""
         with open(os.path.join(self.cwd,'data/events',event['id']+'.txt'),'w') as outputfile:
             json.dump(event,outputfile)
+            return True 
+        return False
 
     def write_counters_to_file(self):
         """This function is used to write/update counter info in the others folder"""
         with open(os.path.join(self.cwd,'data/others/counters.txt'),'w') as outputfile:
             json.dump(CounterValues().last_counter,outputfile)
+            return True 
+        return False
 
     def write_post(self,post):
         """This function is used to write new posts to a given path which can be to a
         group, event or page"""
         with open(os.path.join(self.cwd,'data/posts',post['id']+'.txt'),'w') as outputfile:
             json.dump(post,outputfile)
+            return True 
+        return False
     
     def add_new_user(self, user: UserProfile):
         self.users[user.get_id()] =user
         self.pages[user.timeLine.get_id()]= user.timeLine
-        self.write_user_to_file(user.to_json())
-        self.write_page_to_file(user.timeLine.to_json()) 
+        result1 = self.write_user_to_file(user.to_json())
+        result2 = self.write_page_to_file(user.timeLine.to_json()) 
+        return result1== True and result2 == True 
 
     def delete_user(self, user_id: str):
+        print(user_id)
         path = os.path.join(self.cwd,'data/users',user_id+'.txt')
         if os.path.exists(path):
+            page_deleted = self.delete_page(self.users[user_id].to_json()['timeline'])
             os.remove(path) 
             
-            if not os.path.exists(path) and \
-                self.delete_page(self.users[user_id]['timeline']):
+            if  os.path.exists(path)==False and page_deleted:
+                print('success!!')
                 self.users.pop(user_id)
                 return True
             else: 
+                print('fail!!')
                 return False 
         raise FileNotFoundError 
 
@@ -197,11 +214,11 @@ class DataManipulator():
     def delete_page(self, page_id: str):
         path = os.path.join(self.cwd,'data/pages',page_id+'.txt')
         
-        owner_id = database.pages[page_id]['owner']
-        owner = database.users[owner_id]
+        owner_id = self.pages[page_id].to_json()['owner']
+        owner = self.users[owner_id]
         owner.delete_my_page(page_id)
         self.write_user_to_file(owner.to_json())
-        database.users[owner_id] = owner
+        self.users[owner_id] = owner
 
         if self.__delete_file_from_database(path):
             self.pages.pop(page_id)
@@ -277,56 +294,3 @@ class DataManipulator():
 
 
 
-if __name__ == "__main__":
-    #this code is used to test the functionality of the class dataManipulator
-    database = DataManipulator()
-    print('testing usrs')
-    user = UserProfile(None,'Munaib Alhelali', 'moneebalhelaly@gmail.com', 'munaib1234')
-    database.write_user_to_file(user.to_json())
-    user = UserProfile(None,'admin', 'admin@system.com', 'admin1234')
-    user.set_system_admin(True)
-    database.write_user_to_file(user.to_json())
-   
-    # print('testing pages')
-    # page = Page('mypage',None,user.get_id())
-    # database.write_page_to_file(page.to_json())
-    
-    # print('testing groups')
-    # group = Group('mygroup',None,user.get_id())
-    # database.write_group_to_file(group.to_json()) 
-    
-    # print('testing events')
-    # event = Event('testing code',None,user.get_id())
-    # event.set_place('at home')
-    # event.set_date('01/01/2020')
-    # event.set_time('00:00')
-    # event.set_about('testing the functionality of dataManipulator class')
-    # database.write_event_to_file(event.to_json())
-
-    # print('testing posts')
-    # post_content = 'this is a sample post to test the functionality of the function'
-    # post = Post(id=None, owner =user.get_id(),content=post_content)
-    # database.write_post(post.to_json())
-
-    # database.write_counters_to_file()
-    # print(database.users)
-    # print(database.pages)
-    # print(database.groups)
-    # print(database.events)
-    # print(database.posts)
-    # print(database.last_counter)
-
-    
-
-
-    
-                
-
-
-
-
-
-
-                    
-                           
-                           
